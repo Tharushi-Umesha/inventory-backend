@@ -23,23 +23,3 @@ return [
     
     'supports_credentials' => true,
 ];
-```
-
-#### 1.2: Create a `Procfile` in your Laravel root folder
-
-Create a new file called `Procfile` (no extension) with this content:
-```
-web: vendor/bin/heroku-php-apache2 public/
-```
-
-#### 1.3: Make sure you have `.gitignore`
-
-Check your `.gitignore` includes:
-```
-/node_modules
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.env.backup
