@@ -15,6 +15,23 @@ Route::get('/test', function () {
     return response()->json(['message' => 'API routes working!']);
 });
 
+Route::get('/create-admin-user', function () {
+    // Check if user already exists
+    $existing = \App\Models\User::where('email', 'umesha@email.com')->first();
+
+    if ($existing) {
+        return response()->json(['error' => 'User already exists', 'user' => $existing]);
+    }
+
+    $user = \App\Models\User::create([
+        'name' => 'umesha',
+        'email' => 'umesha@email.com',
+        'password' => \Illuminate\Support\Facades\Hash::make('umesha1234'),
+        'role' => 'admin'
+    ]);
+
+    return response()->json(['success' => true, 'message' => 'Admin user created!', 'user' => $user]);
+});
 Route::middleware('auth:sanctum')->group(function () {
 
     // Auth endpoints
