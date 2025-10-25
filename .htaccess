@@ -1,0 +1,20 @@
+# Enable RewriteEngine
+   RewriteEngine On
+   
+   # Handle CORS preflight requests
+   RewriteCond %{REQUEST_METHOD} OPTIONS
+   RewriteRule ^(.*)$ $1 [R=200,L]
+   
+   # API Routes
+   RewriteRule ^api/(.*)$ api/$1 [L]
+   
+   # Redirect all other requests to index.php
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule ^(.*)$ index.php [L]
+   
+   # Security
+   <FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql)$">
+       Order Allow,Deny
+       Deny from all
+   </FilesMatch>
