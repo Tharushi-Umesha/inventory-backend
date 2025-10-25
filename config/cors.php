@@ -1,40 +1,45 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Cross-Origin Resource Sharing (CORS) Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-    |
-    */
-
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
-
+    
     'allowed_methods' => ['*'],
-
+    
     'allowed_origins' => [
-        'http://localhost:5173',  // Vite default
-        'http://localhost:3000',  // React/Next.js common port
+        'http://localhost:5173',
+        'http://localhost:3000',
         'http://127.0.0.1:5173',
         'http://127.0.0.1:3000',
-        // Add your production URL when you deploy
+        'https://inventory-frontend-lake-chi.vercel.app', // Your Vercel URL
     ],
-
+    
     'allowed_origins_patterns' => [],
-
+    
     'allowed_headers' => ['*'],
-
+    
     'exposed_headers' => [],
-
+    
     'max_age' => 0,
-
+    
     'supports_credentials' => true,
-
 ];
+```
+
+#### 1.2: Create a `Procfile` in your Laravel root folder
+
+Create a new file called `Procfile` (no extension) with this content:
+```
+web: vendor/bin/heroku-php-apache2 public/
+```
+
+#### 1.3: Make sure you have `.gitignore`
+
+Check your `.gitignore` includes:
+```
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
